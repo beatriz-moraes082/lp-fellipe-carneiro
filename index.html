@@ -357,9 +357,69 @@
     .form-card{padding:30px 24px}
     .news-slide{padding:26px 24px 22px}
   }
+
+  /* ===================== UX / microinterações ===================== */
+  html{scroll-padding-top:92px}
+
+  /* botões: leve elevação + sombra */
+  .btn:hover{transform:translateY(-2px)}
+  .btn-ink:hover{box-shadow:0 16px 34px -12px rgba(27,27,25,.5)}
+  .btn-gold:hover{box-shadow:0 16px 34px -12px rgba(184,149,79,.6)}
+  .hero .btn-ink:hover{box-shadow:0 16px 34px -12px rgba(0,0,0,.45)}
+  .form-submit:hover{transform:translateY(-2px);box-shadow:0 16px 34px -12px rgba(184,149,79,.6)}
+
+  /* navegação: sublinhado animado */
+  .nav-links a{position:relative}
+  .nav-links a::after{content:'';position:absolute;left:0;bottom:-6px;width:100%;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .32s cubic-bezier(.2,.7,.2,1);opacity:.85}
+  .nav-links a:hover::after{transform:scaleX(1)}
+
+  /* zoom suave nas imagens/vídeos */
+  .amen .top{transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+  .amen:hover .top{transform:scale(1.06)}
+  .loc-map video,.loc-map img,.mp-frame img,.cta-photo img{transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+  .loc-map:hover video,.loc-map:hover img{transform:scale(1.04)}
+  .mp-frame:hover img{transform:scale(1.03)}
+  .cta-photo:hover img{transform:scale(1.05)}
+
+  /* logos de assinatura: realce no hover */
+  .sig{transition:opacity .4s ease,filter .4s ease;opacity:.6}
+  .s:hover .sig{opacity:1}
+
+  /* âncoras (tese) */
+  .anchor b{transition:color .3s ease}
+  .anchor:hover b{color:var(--gold-soft)}
+
+  /* barra de progresso de scroll */
+  .scroll-prog{position:fixed;top:0;left:0;height:3px;width:0;z-index:60;background:linear-gradient(90deg,var(--gold-deep),var(--gold),var(--gold-soft));box-shadow:0 0 10px rgba(184,149,79,.55);transition:width .12s linear}
+
+  /* WhatsApp: pulso de atenção */
+  @keyframes waPulse{0%{box-shadow:0 14px 32px -8px rgba(0,0,0,.45),0 0 0 0 rgba(37,211,102,.45)}70%{box-shadow:0 14px 32px -8px rgba(0,0,0,.45),0 0 0 18px rgba(37,211,102,0)}100%{box-shadow:0 14px 32px -8px rgba(0,0,0,.45),0 0 0 0 rgba(37,211,102,0)}}
+  .wa-float{animation:waPulse 2.8s ease-out infinite}
+  .wa-float:hover{animation-play-state:paused}
+
+  /* entrada do hero */
+  @keyframes heroIn{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+  .hero .wrap>*{animation:heroIn .95s cubic-bezier(.2,.7,.2,1) both}
+  .hero .wrap>.label{animation-delay:.08s}
+  .hero .wrap>h1{animation-delay:.22s}
+  .hero .wrap>.acts{animation-delay:.42s}
+
+  /* foco acessível (teclado) */
+  a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
+
+  /* respeita "reduzir movimento" */
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1 !important;transform:none !important}
+    .wa-float{animation:none}
+    .hero .wrap>*{animation:none}
+    html{scroll-behavior:auto}
+    *{transition-duration:.001ms !important}
+  }
 </style>
 </head>
 <body>
+
+<div class="scroll-prog" id="scrollProg"></div>
 
 <!-- NAV -->
 <nav id="nav">
@@ -710,7 +770,13 @@
 <script>
   // nav scroll state
   const nav=document.getElementById('nav');
-  window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>40)});
+  const prog=document.getElementById('scrollProg');
+  function onScroll(){
+    nav.classList.toggle('scrolled',window.scrollY>40);
+    if(prog){const h=document.documentElement.scrollHeight-window.innerHeight;prog.style.width=(h>0?(window.scrollY/h)*100:0)+'%';}
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
   // reveal on scroll
   const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
   document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%4*0.06)+'s';io.observe(el)});
