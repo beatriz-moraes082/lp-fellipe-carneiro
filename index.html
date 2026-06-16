@@ -150,10 +150,13 @@
   .slogan-card .corner{position:absolute;width:54px;height:54px;border:1px solid var(--gold);border-radius:50%;right:-18px;bottom:-18px;background:var(--bg)}
 
   /* localizacao */
-  .loc-grid{display:grid;grid-template-columns:0.76fr 1.24fr;gap:56px;align-items:center}
+  .loc-grid{display:grid;grid-template-columns:0.76fr 1.24fr;gap:36px 56px;align-items:center;grid-template-areas:"txt vid" "stats vid"}
+  .loc-text{grid-area:txt}
+  .loc-map{grid-area:vid}
+  .loc-stats{grid-area:stats}
   .loc-text h2{font-size:clamp(2rem,4vw,3.1rem)}
   .loc-text p{color:var(--ink-soft);font-weight:300;margin-top:24px;max-width:44ch}
-  .loc-stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:40px}
+  .loc-stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:0}
   .loc-stats .cell{background:var(--bg);padding:26px 24px}
   .loc-stats .cell b{font-family:var(--serif);font-size:1.5rem;font-weight:600;display:block}
   .loc-stats .cell span{font-size:.78rem;color:var(--muted);letter-spacing:.04em;margin-top:6px;display:block}
@@ -299,7 +302,10 @@
   .cta .btn-ink:hover{background:var(--gold-soft)}
   .cta .btn-out{border-color:rgba(255,255,255,.5);color:#fff}
   .cta .btn-out:hover{border-color:var(--gold-soft);color:var(--gold-soft)}
-  .cta-grid{display:grid;grid-template-columns:.82fr 1.18fr;gap:56px;align-items:stretch}
+  .cta-grid{display:grid;grid-template-columns:.82fr 1.18fr;gap:30px 56px;align-items:center;grid-template-areas:"photo lead" "photo form"}
+  .cta-photo{grid-area:photo;align-self:stretch}
+  .cta-lead{grid-area:lead}
+  .form-card{grid-area:form}
   .cta-lead h2{font-size:clamp(1.5rem,2.6vw,2.1rem);max-width:none}
   .cta-lead p{margin-bottom:0}
   .form-card{background:var(--paper);border-radius:6px;padding:42px 40px;box-shadow:0 34px 90px -44px rgba(0,0,0,.65)}
@@ -311,9 +317,9 @@
   .field textarea{resize:vertical;min-height:64px}
   .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(184,149,79,.14)}
   .field-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-  .form-submit{width:100%;border:0;cursor:pointer;justify-content:center;margin-top:8px;background:var(--gold);color:var(--ink);font-weight:600;font-family:var(--sans);font-size:.86rem;letter-spacing:.04em;padding:16px 30px;border-radius:40px;display:inline-flex;align-items:center;gap:.7em;transition:.35s}
+  .form-submit{width:100%;border:0;cursor:pointer;justify-content:center;margin-top:8px;background:var(--gold);color:var(--ink);font-weight:600;font-family:var(--sans);font-size:.78rem;letter-spacing:.03em;padding:16px 26px;border-radius:40px;display:inline-flex;align-items:center;gap:.6em;transition:.35s}
   .form-submit:hover{background:var(--gold-soft)}
-  .form-note{font-size:.72rem;color:var(--muted);font-weight:300;margin-top:16px;text-align:center;line-height:1.5}
+  .form-card .form-note{font-size:.72rem;color:#6a6d65;font-weight:400;margin-top:16px;text-align:center;line-height:1.5}
 
   /* footer */
   footer{background:var(--ink);color:rgba(255,255,255,.6);padding:70px 0 40px}
@@ -337,20 +343,29 @@
     .wrap{padding:0 24px}
     nav{padding:18px 24px}
     .nav-links{display:none}
-    .concept-grid,.loc-grid,.prod-lead,.amen-grid,.pil-grid,.preco-grid,.esp-grid,.cta-grid{grid-template-columns:1fr;gap:40px}
+    .concept-grid,.prod-lead,.amen-grid,.pil-grid,.preco-grid,.esp-grid{grid-template-columns:1fr;gap:40px}
+    /* Localização: título, subtítulo, vídeo, depois stats */
+    .loc-grid{grid-template-columns:1fr;grid-template-areas:"txt" "vid" "stats";gap:26px}
+    /* CTA: título+subtítulo, foto, formulário */
+    .cta-grid{grid-template-columns:1fr;grid-template-areas:"lead" "photo" "form";gap:28px}
+    /* Especialista: título acima do vídeo */
+    .esp-video{order:2;max-width:360px}
+    .esp-text{order:1}
+    .esp-video iframe{height:640px}
     .sign-row{grid-template-columns:1fr 1fr;gap:26px}
+    .sig{opacity:1}
     .prod-grid,.tese-grid{grid-template-columns:1fr 1fr}
     .preco-cond{border-left:0;padding-left:0}
-    .esp-video{max-width:360px}
-    .esp-video iframe{height:640px}
-    section{padding:80px 0}
+    section{padding:58px 0}
     .sec-head{flex-direction:column;gap:8px}
-    .infra-card{flex:0 0 66%;padding:8px 24px}
+    .infra-card{flex:0 0 100%;padding:8px 4px;border-left:0;justify-content:center;text-align:center}
     .cta-photo{max-height:440px}
   }
   @media(max-width:560px){
     .prod-grid,.tese-grid,.loc-stats{grid-template-columns:1fr}
     .hero-meta{gap:28px}
+    .hero h1{font-size:1.3rem;line-height:1.34}
+    .form-submit{font-size:.74rem;padding:15px 20px}
     #masterplan h2{white-space:normal !important;font-size:1.8rem !important}
     .prod-grid .cell{padding:32px 26px}
     .prod-grid .cell b{font-size:2.1rem}
@@ -470,6 +485,9 @@
   .amen{cursor:pointer}
   .amen .top::before{content:'';position:absolute;z-index:3;top:50%;left:50%;width:56px;height:56px;transform:translate(-50%,-50%) scale(.7);border-radius:50%;background:rgba(255,255,255,.92) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231b1b19' stroke-width='1.6' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cline x1='16.5' y1='16.5' x2='21' y2='21'/%3E%3C/svg%3E") center/24px no-repeat;opacity:0;transition:opacity .4s ease,transform .4s cubic-bezier(.2,.7,.2,1);pointer-events:none}
   .amen:hover .top::before{opacity:1;transform:translate(-50%,-50%) scale(1)}
+  .mp-frame{position:relative;cursor:pointer}
+  .mp-frame::after{content:'';position:absolute;z-index:3;top:50%;left:50%;width:56px;height:56px;transform:translate(-50%,-50%) scale(.7);border-radius:50%;background:rgba(255,255,255,.92) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231b1b19' stroke-width='1.6' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cline x1='16.5' y1='16.5' x2='21' y2='21'/%3E%3C/svg%3E") center/24px no-repeat;opacity:0;transition:opacity .4s ease,transform .4s cubic-bezier(.2,.7,.2,1);pointer-events:none}
+  .mp-frame:hover::after{opacity:1;transform:translate(-50%,-50%) scale(1)}
 
   /* lightbox */
   .lightbox{position:fixed;inset:0;z-index:200;background:rgba(15,18,18,.93);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity .4s ease,visibility .4s}
@@ -574,15 +592,15 @@
       <div class="loc-text reveal">
         <h2>Onde o mapa de Alagoas ainda guarda <span class="it">um segredo.</span></h2>
         <p>Miaí de Cima, Coruripe: encontro de mar, rio e restinga.</p>
-        <div class="loc-stats" id="locStats">
-          <div class="cell"><b>1h16</b><span>De viagem até a capital</span></div>
-          <div class="cell"><b>Zumbi dos Palmares</b><span>Aeroporto de referência</span></div>
-        </div>
       </div>
       <div class="loc-map reveal">
         <video autoplay muted loop playsinline poster="assets-mares/loc-video-poster.jpg">
           <source src="assets-mares/loc-video.mp4" type="video/mp4">
         </video>
+      </div>
+      <div class="loc-stats" id="locStats">
+        <div class="cell"><b>1h16</b><span>De viagem até a capital</span></div>
+        <div class="cell"><b>Zumbi dos Palmares</b><span>Aeroporto de referência</span></div>
       </div>
     </div>
   </div>
@@ -760,7 +778,6 @@
   <div class="wrap">
     <div class="cta-grid">
       <div class="cta-photo reveal"><img src="assets-mares/fellipe-cta.jpg" alt="Fellipe Carneiro, especialista no Litoral Sul de Alagoas" loading="lazy"></div>
-      <div class="cta-right">
       <div class="cta-lead reveal">
         <span class="label" style="color:var(--gold-soft);display:block;margin-bottom:24px">Curadoria · Fellipe Carneiro</span>
         <h2>Uma oportunidade rara<br>não espera <span class="it">a janela fechar.</span></h2>
@@ -794,7 +811,6 @@
           <button type="submit" class="form-submit">Receber informações no WhatsApp <span class="arw">&rarr;</span></button>
           <p class="form-note">Ao enviar, você será direcionado ao WhatsApp da curadoria com seus dados.</p>
         </form>
-      </div>
       </div>
     </div>
   </div>
@@ -869,27 +885,29 @@
       o.observe(grid);
     });
   })();
-  // galeria de lazer (lightbox)
+  // galeria / zoom (lightbox)
   (function(){
-    const cards=[...document.querySelectorAll('.amen')];
     const lb=document.getElementById('lightbox');
     const imgEl=document.getElementById('lbImg');
-    if(!cards.length||!lb||!imgEl)return;
-    const imgs=['assets-mares/beachclub.jpg','assets-mares/living.jpg','assets-mares/racket.jpg','assets-mares/village.jpg'];
-    let idx=0;
-    const show=(i)=>{idx=(i+imgs.length)%imgs.length;imgEl.src=imgs[idx];};
-    const open=(i)=>{show(i);lb.classList.add('open');lb.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';};
+    if(!lb||!imgEl)return;
+    const prevB=document.getElementById('lbPrev'),nextB=document.getElementById('lbNext');
+    let set=[],idx=0;
+    const show=(i)=>{idx=(i+set.length)%set.length;imgEl.src=set[idx];};
+    const open=(arr,i)=>{set=arr;const single=set.length<2;prevB.style.display=single?'none':'';nextB.style.display=single?'none':'';show(i||0);lb.classList.add('open');lb.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';};
     const close=()=>{lb.classList.remove('open');lb.setAttribute('aria-hidden','true');document.body.style.overflow='';};
-    cards.forEach((c,i)=>c.addEventListener('click',()=>open(i)));
+    const amen=['assets-mares/beachclub.jpg','assets-mares/living.jpg','assets-mares/racket.jpg','assets-mares/village.jpg'];
+    document.querySelectorAll('.amen').forEach((c,i)=>c.addEventListener('click',()=>open(amen,i)));
+    const mp=document.querySelector('.mp-frame');
+    if(mp)mp.addEventListener('click',()=>open(['assets-mares/masterplan.jpg'],0));
     document.getElementById('lbClose').onclick=close;
-    document.getElementById('lbPrev').onclick=(e)=>{e.stopPropagation();show(idx-1);};
-    document.getElementById('lbNext').onclick=(e)=>{e.stopPropagation();show(idx+1);};
+    prevB.onclick=(e)=>{e.stopPropagation();show(idx-1);};
+    nextB.onclick=(e)=>{e.stopPropagation();show(idx+1);};
     lb.addEventListener('click',(e)=>{if(e.target===lb)close();});
     document.addEventListener('keydown',(e)=>{
       if(!lb.classList.contains('open'))return;
       if(e.key==='Escape')close();
-      else if(e.key==='ArrowLeft')show(idx-1);
-      else if(e.key==='ArrowRight')show(idx+1);
+      else if(set.length>1&&e.key==='ArrowLeft')show(idx-1);
+      else if(set.length>1&&e.key==='ArrowRight')show(idx+1);
     });
   })();
   // infra carousel
