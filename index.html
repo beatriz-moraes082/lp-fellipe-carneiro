@@ -449,6 +449,15 @@
   @media(max-width:560px){.ig-float{right:16px;bottom:80px;width:54px;height:54px}.ig-float svg{width:28px;height:28px}}
 
   @media (prefers-reduced-motion: reduce){.hero-video{animation:none}.reveal{filter:none !important}}
+
+  /* animação escalonada das stats (Marés do Miaí) */
+  .prod-grid .cell b,.prod-grid .cell>span{opacity:0;transform:translateY(18px);transition:opacity .85s cubic-bezier(.2,.7,.2,1),transform .85s cubic-bezier(.2,.7,.2,1)}
+  .prod-grid.cells-in .cell b,.prod-grid.cells-in .cell>span{opacity:1;transform:none}
+  .prod-grid.cells-in .cell:nth-child(1) b,.prod-grid.cells-in .cell:nth-child(1)>span{transition-delay:.06s}
+  .prod-grid.cells-in .cell:nth-child(2) b,.prod-grid.cells-in .cell:nth-child(2)>span{transition-delay:.20s}
+  .prod-grid.cells-in .cell:nth-child(3) b,.prod-grid.cells-in .cell:nth-child(3)>span{transition-delay:.34s}
+  .prod-grid.cells-in .cell:nth-child(4) b,.prod-grid.cells-in .cell:nth-child(4)>span{transition-delay:.48s}
+  @media (prefers-reduced-motion: reduce){.prod-grid .cell b,.prod-grid .cell>span{opacity:1 !important;transform:none !important}}
 </style>
 </head>
 <body>
@@ -510,7 +519,7 @@
         <h2 style="font-size:clamp(2.6rem,6vw,4.4rem);font-weight:600;line-height:1">Marés do <span class="it">Miaí</span></h2>
       </div>
     </div>
-    <div class="prod-grid reveal" style="margin-top:56px">
+    <div class="prod-grid" id="prodGrid" style="margin-top:56px">
       <div class="cell"><b>78</b><span>Lotes exclusivos</span></div>
       <div class="cell"><span style="margin:0 0 14px">Lotes de</span><b>300 a 530<span class="u">m²</span></b></div>
       <div class="cell"><b>4.000<span class="u">m²</span></b><span>De área de lazer</span></div>
@@ -819,6 +828,13 @@
   // reveal on scroll
   const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
   document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%4*0.06)+'s';io.observe(el)});
+  // stats Marés do Miaí — entrada escalonada
+  (function(){
+    const grid=document.getElementById('prodGrid');
+    if(!grid)return;
+    const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){grid.classList.add('cells-in');o.disconnect();}})},{threshold:.25});
+    o.observe(grid);
+  })();
   // infra carousel
   (function(){
     const track=document.getElementById('infraTrack');
