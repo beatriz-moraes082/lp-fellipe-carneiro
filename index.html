@@ -304,9 +304,10 @@
   .cta .btn-ink:hover{background:var(--gold-soft)}
   .cta .btn-out{border-color:rgba(255,255,255,.5);color:#fff}
   .cta .btn-out:hover{border-color:var(--gold-soft);color:var(--gold-soft)}
-  .cta-grid{display:grid;grid-template-columns:.82fr 1.18fr;gap:30px 56px;align-items:center;grid-template-areas:"photo lead" "photo form"}
+  .cta-grid{display:grid;grid-template-columns:.82fr 1.18fr;gap:22px 56px;align-items:center;grid-template-areas:"photo lead" "photo sub" "photo form"}
   .cta-photo{grid-area:photo;align-self:stretch}
   .cta-lead{grid-area:lead}
+  .cta .cta-sub{grid-area:sub;margin:0;max-width:42ch}
   .form-card{grid-area:form}
   .cta-lead h2{font-size:clamp(1.5rem,2.6vw,2.1rem);max-width:none}
   .cta-lead p{margin-bottom:0}
@@ -343,7 +344,7 @@
   /* responsive */
   @media(max-width:900px){
     .wrap{padding:0 24px}
-    nav{padding:18px 24px}
+    nav{padding:18px 24px;justify-content:center}
     .nav-links{display:none}
     .concept-grid,.prod-lead,.amen-grid,.pil-grid,.preco-grid{grid-template-columns:1fr;gap:40px}
     /* Especialista: título, subtítulo, vídeo, descrição, cta */
@@ -352,7 +353,7 @@
     /* Localização: título, subtítulo, vídeo, depois stats */
     .loc-grid{grid-template-columns:1fr;grid-template-areas:"txt" "vid" "stats";gap:26px}
     /* CTA: título+subtítulo, foto, formulário */
-    .cta-grid{grid-template-columns:1fr;grid-template-areas:"lead" "photo" "form";gap:28px}
+    .cta-grid{grid-template-columns:1fr;grid-template-areas:"lead" "photo" "sub" "form";gap:24px}
     /* Especialista: título acima do vídeo */
     .esp-video{max-width:360px}
     .esp-video iframe{height:640px}
@@ -363,6 +364,7 @@
     section{padding:58px 0}
     .sec-head{flex-direction:column;gap:8px}
     .infra-card{flex:0 0 100%;padding:8px 4px;border-left:0;justify-content:center;text-align:center}
+    .infra-nav{justify-content:center}
     .cta-photo{max-height:440px}
   }
   @media(max-width:560px){
@@ -787,8 +789,8 @@
       <div class="cta-lead reveal">
         <span class="label" style="color:var(--gold-soft);display:block;margin-bottom:24px">Curadoria · Fellipe Carneiro</span>
         <h2>Uma oportunidade rara<br>não espera <span class="it">a janela fechar.</span></h2>
-        <p>Confirme seus dados para receber informações via WhatsApp.</p>
       </div>
+      <p class="cta-sub reveal">Confirme seus dados para receber informações via WhatsApp.</p>
       <div class="form-card reveal">
         <form id="leadForm" novalidate>
           <div class="field">
