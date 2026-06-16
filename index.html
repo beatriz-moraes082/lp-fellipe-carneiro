@@ -415,6 +415,40 @@
     html{scroll-behavior:auto}
     *{transition-duration:.001ms !important}
   }
+
+  /* ===================== refinamento "alto padrão" ===================== */
+  /* tick dourado antes dos kickers de seção */
+  .sec-head .label::before{content:'';display:inline-block;width:30px;height:1px;background:var(--gold);vertical-align:middle;margin-right:16px;margin-bottom:3px}
+
+  /* hero cinematográfico — zoom lento (Ken Burns) */
+  @keyframes heroKen{from{transform:scale(1.03)}to{transform:scale(1.13)}}
+  .hero-video{animation:heroKen 24s ease-out both;transform-origin:50% 45%}
+
+  /* reveal com leve desfoque (mais sofisticado) */
+  .reveal{filter:blur(7px);transition:opacity 1s cubic-bezier(.2,.7,.2,1),transform 1s cubic-bezier(.2,.7,.2,1),filter 1s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{filter:blur(0)}
+
+  /* botões mais encorpados */
+  .btn{padding:17px 34px}
+
+  /* respiro maior entre seções (desktop) */
+  @media(min-width:901px){section{padding:140px 0}}
+
+  /* scrollbar refinada (desktop) */
+  @media(min-width:901px){
+    ::-webkit-scrollbar{width:11px}
+    ::-webkit-scrollbar-track{background:var(--bg)}
+    ::-webkit-scrollbar-thumb{background:var(--gold-soft);border:3px solid var(--bg);border-radius:10px}
+    ::-webkit-scrollbar-thumb:hover{background:var(--gold)}
+  }
+
+  /* Instagram flutuante */
+  .ig-float{position:fixed;right:26px;bottom:98px;z-index:80;width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 14px 32px -8px rgba(0,0,0,.4);transition:.35s;text-decoration:none;background:radial-gradient(circle at 30% 107%,#fdf497 0%,#fdf497 5%,#fd5949 45%,#d6249f 60%,#285AEB 90%)}
+  .ig-float:hover{transform:scale(1.08);box-shadow:0 18px 40px -8px rgba(0,0,0,.5)}
+  .ig-float svg{width:31px;height:31px;fill:#fff}
+  @media(max-width:560px){.ig-float{right:16px;bottom:80px;width:54px;height:54px}.ig-float svg{width:28px;height:28px}}
+
+  @media (prefers-reduced-motion: reduce){.hero-video{animation:none}.reveal{filter:none !important}}
 </style>
 </head>
 <body>
@@ -761,6 +795,11 @@
     </div>
   </div>
 </footer>
+
+<!-- Instagram flutuante -->
+<a class="ig-float" href="https://www.instagram.com/eufellipecarneiro/" target="_blank" rel="noopener" aria-label="Instagram do Fellipe Carneiro">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16zm0 3.08a6.76 6.76 0 1 0 0 13.52 6.76 6.76 0 0 0 0-13.52zm0 11.15a4.39 4.39 0 1 1 0-8.78 4.39 4.39 0 0 1 0 8.78zm6.62-11.39a1.58 1.58 0 1 1-3.16 0 1.58 1.58 0 0 1 3.16 0z"/></svg>
+</a>
 
 <!-- WhatsApp flutuante -->
 <a class="wa-float" href="https://wa.me/558281465256?text=Ol%C3%A1%2C%20Fellipe!%20Tenho%20interesse%20no%20Mar%C3%A9s%20do%20Mia%C3%AD." target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
